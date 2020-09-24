@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: q-network-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      app: qservice-app
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          source: frontEnd 
+    - podSelector:
+        matchLabels:
+          role: qClient
+    ports:
+    - protocol: TCP
+      port: 8081

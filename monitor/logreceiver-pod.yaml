@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: logreceiver-pod
+  name: logreceiver-pod
+  namespace: kube-system
+spec:
+  containers:
+  - image: mendhak/http-https-echo
+    name: logreceiver-pod
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  nodeSelector:
+    role: ops
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: logreceiver
+  name: logreceiver
+  namespace: kube-system
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: logreceiver-pod
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

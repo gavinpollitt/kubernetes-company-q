@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: qclient-dep
+  name: qclient-dep
+  namespace: client
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: qclient-app
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: qclient-app
+    spec:
+      volumes:
+      - name: config-volume
+        configMap:
+          name: qclient-config
+      - name: log-volume
+        emptyDir: {}
+      containers:
+      - image: gavinpollitt/qclient
+        name: qclient
+        volumeMounts:
+        - name: config-volume
+          mountPath: /home/config
+        - name: log-volume
+          mountPath: /logs
+      - image: busybox:1.28
+        name: qlogger
+        args: [/bin/sh, -c, 'tail -n+1 -f ./logs/qclient.log']
+        volumeMounts:
+        - name: log-volume
+          mountPath: ./logs

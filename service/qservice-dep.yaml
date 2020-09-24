@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: qservice-dep
+  name: qservice-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qservice-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: qservice-app
+    spec:
+      volumes:
+      - name: db-pv-store
+        persistentVolumeClaim:
+          claimName: task-pv-claim
+      - name: config-volume
+        configMap:
+          name: qservice-config
+      containers:
+      - image: gavinpollitt/qservice
+        name: qservice
+        volumeMounts:
+        - name: config-volume
+          mountPath: /home/config
+      - image: buildo/h2database
+        name: qservice-store 
+        volumeMounts:
+        - mountPath: "/h2-data"
+          name: db-pv-store
+      nodeSelector:
+        type: data

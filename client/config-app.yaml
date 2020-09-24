@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: qclient-config
+  namespace: client
+data:
+  application.yml: |
+    server:
+      port: 8080
+    qservice:
+      url: http://qservice-dep.default.svc.cluster.local:8081/queueService
