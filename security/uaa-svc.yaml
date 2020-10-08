@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: uaa-dep
+  name: uaa-dep
+  namespace: security
+spec:
+  ports:
+  - port: 8090
+    protocol: TCP
+    targetPort: 8090
+    name: gui
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+    name: access
+  selector:
+    app: uaa-dep
+  type: NodePort
+status:

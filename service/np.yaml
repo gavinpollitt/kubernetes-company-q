@@ -14,7 +14,7 @@ spec:
     - namespaceSelector:
         matchLabels:
           source: frontEnd 
-    - podSelector:
+      podSelector:
         matchLabels:
           role: qClient
     ports:

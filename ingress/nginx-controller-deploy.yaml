@@ -345,7 +345,7 @@ spec:
             - --validating-webhook=:8443
             - --validating-webhook-certificate=/usr/local/certificates/cert
             - --validating-webhook-key=/usr/local/certificates/key
-            - --v=5
+            - --v=2
           securityContext:
             capabilities:
               drop:

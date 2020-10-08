@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: uaa-dep
+  name: uaa-dep
+  namespace: security
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uaa-dep
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: uaa-dep
+    spec:
+      hostAliases:
+      - ip: 172.18.120.197
+        hostnames:
+        - "gav.wsl2"
+      volumes:
+      - name: conf-vol
+        configMap:
+          name: uaa-config
+      containers:
+      - image: gavinpollitt/uaa:1.0
+        name: uaa
+        resources: {}
+        volumeMounts:
+        - name: conf-vol
+          mountPath: /usr/local/tomcat/temp/uaa
+        ports:
+        - containerPort: 8090
+status: {}
