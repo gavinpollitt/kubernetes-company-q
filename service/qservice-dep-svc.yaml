@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2020-10-12T18:39:10Z"
+  labels:
+    app: qservice-dep
+  name: qservice-dep
+  namespace: default
+spec:
+  clusterIP: 10.43.168.167
+  ports:
+  - port: 8081
+    protocol: TCP
+    targetPort: 8081
+  selector:
+    app: qservice-app
+  sessionAffinity: None

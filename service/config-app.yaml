@@ -19,8 +19,8 @@ data:
               format_sql: false
               show_sql: true
               use_sql_comments: false
-    server:
-      port: 8081
     queue:
       maxEntries: 6
       timeout: 5
+    server:
+      port: 8081

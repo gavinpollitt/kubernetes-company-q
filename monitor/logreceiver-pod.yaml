@@ -8,8 +8,10 @@ metadata:
   namespace: kube-system
 spec:
   containers:
-  - image: mendhak/http-https-echo
+  - image: gavinpollitt/wiremock:arm-1.0
     name: logreceiver-pod
+    ports:
+    - containerPort: 8085
   dnsPolicy: ClusterFirst
   restartPolicy: Always
   nodeSelector:
@@ -26,7 +28,7 @@ spec:
   ports:
   - port: 8080
     protocol: TCP
-    targetPort: 80
+    targetPort: 8085
   selector:
     run: logreceiver-pod
   sessionAffinity: None

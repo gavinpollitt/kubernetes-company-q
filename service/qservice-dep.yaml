@@ -25,12 +25,12 @@ spec:
         configMap:
           name: qservice-config
       containers:
-      - image: gavinpollitt/qservice
+      - image: gavinpollitt/qservice:arm-1.1
         name: qservice
         volumeMounts:
         - name: config-volume
           mountPath: /home/config
-      - image: buildo/h2database
+      - image: gavinpollitt/h2arm:1.0
         name: qservice-store 
         volumeMounts:
         - mountPath: "/h2-data"

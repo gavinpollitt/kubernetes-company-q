@@ -65,7 +65,7 @@ spec:
         effect: NoSchedule
       containers:
       - name: fluentd
-        image: gavinpollitt/kubfluentd:1.2
+        image: gavinpollitt/kubfluentd:arm-1.0
         resources:
           limits:
             memory: 200Mi

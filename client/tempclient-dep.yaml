@@ -22,19 +22,10 @@ spec:
       - name: config-volume
         configMap:
           name: qclient-config
-      - name: log-volume
-        emptyDir: {}
       containers:
       - image: gavinpollitt/qclient:arm-1.0
         name: qclient
         volumeMounts:
         - name: config-volume
           mountPath: /home/config
-        - name: log-volume
-          mountPath: /logs
-      - image: busybox:1.28
-        name: qlogger
-        args: [/bin/sh, -c, 'tail -n+1 -f ./logs/qclient.log']
-        volumeMounts:
-        - name: log-volume
-          mountPath: ./logs
+
