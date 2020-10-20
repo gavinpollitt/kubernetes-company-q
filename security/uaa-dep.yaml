@@ -19,15 +19,15 @@ spec:
         app: uaa-dep
     spec:
       hostAliases:
-      - ip: 172.18.120.197
+      - ip: 192.168.1.25
         hostnames:
-        - "gav.wsl2"
+        - "gav-wsl2.poll.com"
       volumes:
       - name: conf-vol
         configMap:
           name: uaa-config
       containers:
-      - image: gavinpollitt/uaa:1.0
+      - image: gavinpollitt/uaa:arm-1.0
         name: uaa
         resources: {}
         volumeMounts:

@@ -283,6 +283,10 @@ metadata:
   namespace: ingress-nginx
 spec:
   type: LoadBalancer
+  externalIPs:
+  - 192.168.1.25
+  - 192.168.1.30
+  - 192.168.1.31
   externalTrafficPolicy: Local
   ports:
     - name: http
@@ -327,9 +331,15 @@ spec:
         app.kubernetes.io/component: controller
     spec:
       dnsPolicy: ClusterFirst
+      hostAliases:
+      - ip: 192.168.1.25
+        hostnames:
+        - "gav-wsl2.poll.com"
       containers:
         - name: controller
-          image: k8s.gcr.io/ingress-nginx/controller:v0.35.0@sha256:fc4979d8b8443a831c9789b5155cded454cb7de737a8b727bc2ba0106d2eae8b
+          #image: k8s.gcr.io/ingress-nginx/controller:v0.35.0@sha256:fc4979d8b8443a831c9789b5155cded454cb7de737a8b727bc2ba0106d2eae8b
+          #image:  quay.io/kubernetes-ingress-controller/nginx-ingress-controller-arm64:0.32.0
+          image: rancher/nginx-ingress-controller:nginx-0.32.0-rancher1-arm64
           imagePullPolicy: IfNotPresent
           lifecycle:
             preStop:
@@ -345,7 +355,7 @@ spec:
             - --validating-webhook=:8443
             - --validating-webhook-certificate=/usr/local/certificates/cert
             - --validating-webhook-key=/usr/local/certificates/key
-            - --v=2
+            - --v=10
           securityContext:
             capabilities:
               drop:

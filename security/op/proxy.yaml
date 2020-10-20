@@ -16,16 +16,16 @@ spec:
         k8s-app: oauth2-proxy
     spec:
       hostAliases:
-      - ip: 172.18.120.197
+      - ip: 192.168.1.25
         hostnames: 
-        - "gav.wsl2"
+        - "gav-wsl2.poll.com"
       containers:
       - args:
         - --provider=oidc
-        - --oidc-issuer-url=http://gav.wsl2/uaa/oauth/token
+        - --oidc-issuer-url=http://gav-wsl2.poll.com/uaa/oauth/token
         - --email-domain=*
         - --provider-display-name="UAA Provider"
-        - --redirect-url=https://gav.wsl2/oauth2/callback
+        - --redirect-url=https://gav-wsl2.poll.com/oauth2/callback
         - --client-id=proxy_gateway
         - --client-secret=thisissecret
         - --cookie-secure=false
@@ -41,7 +41,7 @@ spec:
         # docker run -ti --rm python:3-alpine python -c 'import secrets,base64; print(base64.b64encode(base64.b64encode(secrets.token_bytes(16))));'
         - name: OAUTH2_PROXY_COOKIE_SECRET
           value: OHNLcEQ5Y3ZiZlJxMjkrb2ZkN2REQT09
-        image: quay.io/oauth2-proxy/oauth2-proxy:latest
+        image: quay.io/oauth2-proxy/oauth2-proxy:latest-arm64
         imagePullPolicy: Always
         name: oauth2-proxy
         ports:

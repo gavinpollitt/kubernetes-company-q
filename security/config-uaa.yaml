@@ -7,10 +7,10 @@ data:
   uaa.yml: |
         uaa:
           #url: http://uaa-dep.security.svc.cluster.local:8090
-          url: http://gav.wsl2
+          url: http://gav-wsl2.poll.com
         issuer:
           #uri: http://uaa-dep.security.svc.cluster.local:8090/uaa
-          uri: http://gav.wsl2/uaa
+          uri: http://gav-wsl2.poll.com/uaa
 
         encryption:
           encryption_keys:
@@ -36,7 +36,7 @@ data:
               scope: openid,profile,email,resource.read
               authorities: uaa.resource
               #redirect-uri: http://gav.wsl2/login/oauth2/code/proxy_gateway
-              redirect-uri: https://gav.wsl2/oauth2/callback
+              redirect-uri: https://gav-wsl2.poll.com/oauth2/callback
         scim:
           groups:
             email: Access your email address
