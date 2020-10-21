@@ -24,11 +24,17 @@ spec:
       - name: config-volume
         configMap:
           name: qservice-config
+      - name: boot-volume
+        configMap:
+          name: qservice-boot
       containers:
       - image: gavinpollitt/qservice:arm-1.3
         name: qservice
         volumeMounts:
         - name: config-volume
+          mountPath: /home/config
+        volumeMounts:
+        - name: boot-volume
           mountPath: /home/config
       - image: gavinpollitt/h2arm:1.0
         name: qservice-store 

@@ -22,6 +22,12 @@ data:
     management:
       security:
         enabled: false
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: qservice-boot
+data:
   bootstrap.yml: |
     spring:
       application:

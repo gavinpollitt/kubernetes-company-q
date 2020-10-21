@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-conf-dep
+  name: spring-conf-dep
+  namespace: config
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-conf-dep
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: spring-conf-dep
+    spec:
+      volumes:
+      - name: git-repo-vol
+        hostPath:
+          path: "/home/ubuntu/git/repo"
+          type: Directory
+      containers:
+      - image: gavinpollitt/spring-config-arm64:1.0
+        name: spring-cloud-config-server
+        env:
+        - name: SPRING_CLOUD_CONFIG_SERVER_GIT_URI
+          value: file:/config
+        volumeMounts:
+        - mountPath: "/config"
+          name: git-repo-vol
+        ports:
+        - containerPort: 8888
+      nodeSelector:
+        type: data
+status: {}
