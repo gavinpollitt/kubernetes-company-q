@@ -30,6 +30,14 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /home/config
+          #below cannot be used due to the network policy preventing access from the kubelet
+          #livenessProbe:
+          #httpGet:
+          #  path: /actuator/health
+          #  port: 8081
+          #initialDelaySeconds: 10
+          #periodSeconds: 10
+          #timeoutSeconds: 20
       - image: gavinpollitt/h2arm:1.0
         name: qservice-store 
         volumeMounts:
