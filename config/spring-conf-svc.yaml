@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-conf-dep
+  name: spring-conf-dep
+  namespace: config
+spec:
+  ports:
+  - port: 8888
+    protocol: TCP
+    targetPort: 8888
+  selector:
+    app: spring-conf-dep
+status:
+  loadBalancer: {}

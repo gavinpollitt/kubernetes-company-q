@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: zipkin-dep
+  name: zipkin-dep
+  namespace: config
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zipkin-dep
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: zipkin-dep
+    spec:
+      containers:
+      - image: gavinpollitt/zipkin:arm-1.0
+        name: zipkin
+        ports:
+        - containerPort: 9411 
+      nodeSelector:
+        type: data

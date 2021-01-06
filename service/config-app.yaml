@@ -5,11 +5,6 @@ metadata:
 data:
   application.yml: |
     spring:
-      datasource:
-        driverClassName: org.h2.Driver
-        url: jdbc:h2:tcp://localhost:1521/gav
-        username:
-        password:
       jpa:
         database-platform: org.hibernate.dialect.H2Dialect
         hibernate:
@@ -20,7 +15,18 @@ data:
               show_sql: true
               use_sql_comments: false
     queue:
-      maxEntries: 6
+      maxEntries: 3
       timeout: 5
     server:
       port: 8081
+    management:
+      security:
+        enabled: false
+  bootstrap.yml: |
+    spring:
+      application:
+        name: qserver-pi
+      cloud:
+        config:
+          uri: http://spring-conf-dep.config:8888
+        enabled: false
