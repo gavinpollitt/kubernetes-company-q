@@ -10,10 +10,10 @@ metadata:
 spec:
   tls:
   - hosts:
-      - gav.wsl2
+      - gav-wsl2.poll.com
     secretName: gavq
   rules:
-  - host: gav.wsl2
+  - host: gav-wsl2.poll.com
     http:
       paths:
       - path: /queue
